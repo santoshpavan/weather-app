@@ -6,19 +6,20 @@ const location = process.argv[2];
 if(!location){
     console.log("Please enter the location.");
 } else{
-    geoCode(location, (error, data) => {
+    //object destructuring used with default value set to empty when there's an error
+    geoCode(location, (error, {location, latitude, longitude} = {}) => {
         if(error){
-            console.log(error);
-        } else{
-            console.log(data);
-            //callback chaining
-            forecast(-75.7088, 44.1545, (error, data) => {
-                if(error){
-                    console.log('Error', error);
-                }else{
-                    console.log('Data', data);
-                }
-            });
+             return console.log(error);
         }
+        console.log("The location is: ", location);
+        console.log("The latitude is: ", latitude);
+        console.log("The longitude is: ", longitude);
+        //callback chaining
+        forecast(latitude, longitude, (error, data) => {
+            if(error){
+                return console.log('Error', error);
+            }
+            console.log('Data', data);
+        });
     });
 }
