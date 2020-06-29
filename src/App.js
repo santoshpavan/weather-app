@@ -1,13 +1,17 @@
 const express = require('express');
 const path = require('path');
 
-console.log(__dirname);
-
-const public_path = path.join(__dirname, "../public");
-
 const app = express();
 
+// defining paths for express config
+const public_path = path.join(__dirname, "../public");
+const views_path = path.join(__dirname, '../views'); //allows custom path definition
+
+// setup handlebars engine and views location
 app.set('view engine', 'hbs');
+app.set('views', views_path);
+
+// setup static directory to serve
 app.use('/public', express.static(public_path));
 
 // req -> request; res -> result
@@ -18,13 +22,19 @@ app.get('', (req, res) => {
     });
 })
 
-// app.get('/help', (req, res) => {
-//     res.send("<h1>Help</h1>");
-// })
+app.get('/help', (req, res) => {
+    res.render('help', {
+        title: 'Help',
+        description: 'Please contact weather-app@notmadeupmail.com for any questions.'
+    })
+})
 
-// app.get('/about', (req, res) => {
-//     res.send("<h1>About</h1>");
-// })
+app.get('/about', (req, res) => {
+    res.render('about', {
+        title: 'About',
+        description: 'This dude is not me but a random dude off the internet probably named dude. I am making this as a part of a course to learn NodeJS.'
+    });
+})
 
 app.get('/weather', (req, res) => {
     res.send({
