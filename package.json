@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/santoshpavan/weather-app#readme",
   "dependencies": {
+    "hbs": "^4.0.1",
     "request": "^2.88.0"
   }
 }
