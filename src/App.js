@@ -39,12 +39,14 @@ app.get('/about', (req, res) => {
     });
 })
 
-app.get('/weather', (req, res) => {
-    res.send({
-        location: "Keka",
-        longitude: 10,
-        latitude: 20
-    });
+// specific error display for path "/help/*"
+app.get('/help/*', (req, res) => {
+    res.send('404. This help article doesn\'t exist');
+})
+
+// general error display for any path that doesn't satisfy above ones
+app.get('*', (req, res) => {
+    res.send('404. This page doesn\'t exist');
 })
 
 app.listen(3000, () => {
