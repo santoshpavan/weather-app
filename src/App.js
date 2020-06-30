@@ -41,12 +41,18 @@ app.get('/about', (req, res) => {
 
 // specific error display for path "/help/*"
 app.get('/help/*', (req, res) => {
-    res.send('404. This help article doesn\'t exist');
+    res.render('404',{
+        title: 'Error',
+        error_description: '404. Help article not found.'
+    })
 })
 
 // general error display for any path that doesn't satisfy above ones
 app.get('*', (req, res) => {
-    res.send('404. This page doesn\'t exist');
+    res.render('404', {
+        title: 'Error',
+        error_description: '404. Page not found.'
+    })
 })
 
 app.listen(3000, () => {
