@@ -9,9 +9,8 @@ const message = document.querySelector('#message');
 weather_form.addEventListener('submit', (event) => {
     // to prevent the reload of the page
     event.preventDefault();
-    let url = '/weather?address=' + search_input.value;
-
-    fetch(url).then((response) => {
+    
+    fetch('/weather?address=' + search_input.value).then((response) => {
         response.json().then( (data) => {
             if(data.error){
                 message.textContent = data.error;
