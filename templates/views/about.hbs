@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+
+<html>
+    <title>About</title>
+    <link rel="icon", href="/public/image/weather.png">
+    <head>
+        <link rel="stylesheet", href="/public/css/styles.css">
+    </head>
+
+    <body>
+        {{!-- using flexbox technique for footer --}}
+        <div class="main-content">
+            {{>header}}
+            <img class="potrait" src="/public/image/dude.jpg">
+            <p>{{description}}</p>
+        </div>
+        {{>footer}}
+    </body>
+</html>
