@@ -9,7 +9,7 @@ const message = document.querySelector('#message');
 weather_form.addEventListener('submit', (event) => {
     // to prevent the reload of the page
     event.preventDefault();
-    let url = 'http://localhost:3000/weather?address=' + search_input.value;
+    let url = '/weather?address=' + search_input.value;
 
     fetch(url).then((response) => {
         response.json().then( (data) => {

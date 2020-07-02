@@ -6,6 +6,8 @@ const geoCode = require('./utils/Geocode');
 const forecast = require('./utils/Forecast');
 
 const app = express();
+// getting the heroku assigned port value if assigned or 3000 by default
+const port = process.env.PORT || 3000;
 
 // defining paths for express config
 const public_path = path.join(__dirname, "../public");
@@ -104,6 +106,6 @@ app.get('*', (req, res) => {
     })
 })
 
-app.listen(3000, () => {
-    console.log("Server is up in localhost 3000");
+app.listen(port, () => {
+    console.log("Server is up in localhost " + port);
 });//listen to 3000 port
