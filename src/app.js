@@ -96,4 +96,4 @@ app.get('*', (req, res) => {
 
 app.listen(port, () => {
     console.log("Server is up in localhost " + port);
-});//listen to 3000 port
+});//listen to heroku port or 3000 port
