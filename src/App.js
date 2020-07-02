@@ -54,27 +54,22 @@ app.get('/weather', (req, res) => {
         //object destructuring used with default value set to empty when there's an error
         geoCode(location, (error, {location, latitude, longitude} = {}) => {
             if(error){
-                // return console.log(error);
                 return res.render('404',{
                     title: 'Error',
                     error_description: error
                 });
             }
-            // console.log("The location is: ", location);
-            // console.log("The latitude is: ", latitude);
-            // console.log("The longitude is: ", longitude);
+            
             //callback chaining
             forecast(latitude, longitude, (error, data) => {
                 if(error){
-                    // return console.log('Error', error);
                     return res.render('404',{
                         title: 'Error',
                         error_description: error
                     });
                 }
-                // console.log('Data', data);
                 res.send({
-                    data: data
+                    data
                 });
             });
         });
