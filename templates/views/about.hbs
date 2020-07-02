@@ -6,9 +6,12 @@
     </head>
 
     <body>
-        {{>header}}
-        <img src="/public/image/dude.jpg">
-        <p>{{description}}</p>
+        {{!-- using flexbox technique for footer --}}
+        <div class="main-content">
+            {{>header}}
+            <img class="potrait" src="/public/image/dude.jpg">
+            <p>{{description}}</p>
+        </div>
         {{>footer}}
     </body>
 </html>
