@@ -45,27 +45,39 @@ app.get('/about', (req, res) => {
 app.get('/weather', (req, res) => {
     const location = req.query.address;
     if(!location){
-        res.render('404',{
+        // res.render('404',{
+        //     title: 'Error',
+        //     error_description: 'Invalid address'
+        // });
+        return res.send({
             title: 'Error',
-            error_description: 'Invalid address'
-        });
+            error: 'Please enter address'
+        })
     }
     else{
         //object destructuring used with default value set to empty when there's an error
         geoCode(location, (error, {location, latitude, longitude} = {}) => {
             if(error){
-                return res.render('404',{
+                // return res.render('404',{
+                //     title: 'Error',
+                //     error_description: error
+                // });
+                return res.send({
                     title: 'Error',
-                    error_description: error
+                    error
                 });
             }
             
             //callback chaining
             forecast(latitude, longitude, (error, data) => {
                 if(error){
-                    return res.render('404',{
+                    // return res.render('404',{
+                    //     title: 'Error',
+                    //     error_description: error
+                    // });
+                    return res.send({
                         title: 'Error',
-                        error_description: error
+                        error
                     });
                 }
                 res.send({
