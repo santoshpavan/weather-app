@@ -2,6 +2,9 @@ const express = require('express');
 const path = require('path');
 const hbs = require('hbs');
 
+const geoCode = require('./utils/Geocode');
+const forecast = require('./utils/Forecast');
+
 const app = express();
 
 // defining paths for express config
@@ -37,6 +40,45 @@ app.get('/about', (req, res) => {
         title: 'About',
         description: 'This dude is not me but a random dude off the internet probably named dude. I am making this as a part of a course to learn NodeJS.'
     });
+})
+
+app.get('/weather', (req, res) => {
+    const location = req.query.address;
+    if(!location){
+        res.render('404',{
+            title: 'Error',
+            error_description: 'Invalid address'
+        });
+    }
+    else{
+        //object destructuring used with default value set to empty when there's an error
+        geoCode(location, (error, {location, latitude, longitude} = {}) => {
+            if(error){
+                // return console.log(error);
+                return res.render('404',{
+                    title: 'Error',
+                    error_description: error
+                });
+            }
+            // console.log("The location is: ", location);
+            // console.log("The latitude is: ", latitude);
+            // console.log("The longitude is: ", longitude);
+            //callback chaining
+            forecast(latitude, longitude, (error, data) => {
+                if(error){
+                    // return console.log('Error', error);
+                    return res.render('404',{
+                        title: 'Error',
+                        error_description: error
+                    });
+                }
+                // console.log('Data', data);
+                res.send({
+                    data: data
+                });
+            });
+        });
+    }
 })
 
 // specific error display for path "/help/*"
